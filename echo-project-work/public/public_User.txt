@@ -1,0 +1,7 @@
+Files in /public are served to the client as-is. 
+Use this to store assets such as images. For example, 
+if you have an image located at /public/background.png, 
+you can include it in your HTML with 
+<img src='/background.png'/> or in your CSS with 
+background-image:url(/background.png). 
+Note that /public is not part of the image URL.
