@@ -18,6 +18,9 @@ body {
 	border-bottom: 1px solid #eee;
 	margin-left: 10px;
 }
+.sub-header p {
+	margin-right: auto;
+}
 .page-header{
 	padding: 0;
 	border-bottom:0;
