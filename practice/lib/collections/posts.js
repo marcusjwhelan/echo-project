@@ -5,3 +5,11 @@
 // posted there by the js code in
 // /client/posts/post_list.js
 Posts = new Mongo.Collection('posts');
+
+// Need this to post after we removed insecure
+Posts.allow({// allows users to edit Posts collection
+  insert: function(userId, doc) {
+    // only allow posting if you are logged in
+    return !! userId;
+  }
+});
