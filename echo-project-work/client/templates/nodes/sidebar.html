@@ -1,0 +1,26 @@
+<template name="sidebar">
+    <ul class="sidebar-nav" id="sidebar" role="navigation">     
+      {{#each nodes}}
+      <li>
+        <a href="{{pathFor 'ExampleNode'}}">
+          Example Node 
+        </a>
+      </li>
+      {{/each}}
+            
+            
+            
+            <!--{{#each nodes}}
+                {{> listNode}}
+            {{/each}} -->
+    
+    
+    <!--
+    <div class="posts">
+    {{#each posts}}
+      {{> postItem}}
+    {{/each}}
+  </div>
+  -->
+    </ul>
+</template>

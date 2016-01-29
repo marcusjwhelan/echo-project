@@ -2,30 +2,26 @@
     <div id="wrapper" class="active">
     <!-- Sidebar -->
         <div id="sidebar-wrapper">
-            <ul id="sidebar_menu" class="sidebar-nav">
+            <ul id="sidebar_menu" class="sidebar-nav" role="navigation">
                 <li class="sidebar-brand">
-                    <a id="menu-toggle" href="{{pathFor route='home'}}">
+                    <a id="menu-toggle" href="{{pathFor 'Home'}}">
                         Home
                     </a>
                 </li>
             </ul>
-        <ul class="sidebar-nav" id="sidebar">     
-          <li><a>node1</a></li>
-          <li><a>node2</a></li>
-        </ul>
-      </div>
-          
-      <!-- Page content -->
-      <div id="page-content-wrapper">
-        <!-- Keep all page content within the page-content inset div! -->
-        <div class="page-content inset">
-          <div class="row">
-            <div class="col-md-12" id="main">
-                {{> home}}
-                {{> yield}}
-            </div>
-          </div>
+            {{> sidebar}}
         </div>
-      </div>
+      <!-- Page content -->
+        <div id="page-content-wrapper">
+        <!-- Keep all page content within the page-content inset div! -->
+            <div class="page-content inset">
+                <div class="row">
+                    <div class="col-md-12" id="main">
+                        <!--{{> home}}-->
+                        {{> yield}}
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>

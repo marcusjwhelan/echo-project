@@ -1,6 +1,12 @@
 if(Nodes.find().count() === 0){
     Nodes.insert({
-        title: 'Node 1'
+        title: 'Example Node',
+    });
+    Nodes.insert({
+        title: 'Node 2',
+    });
+    Nodes.insert({
+        title: 'Node 3',
     });
 }
 
