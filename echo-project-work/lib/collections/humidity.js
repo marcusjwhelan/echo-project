@@ -1,0 +1,1 @@
+Humidity = new Mongo.Collection("humidity");

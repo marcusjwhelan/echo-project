@@ -1,12 +1,12 @@
 if(Nodes.find().count() === 0){
     Nodes.insert({
-        title: 'Example Node',
+        name: "Example Node",
+        path: "ExampleNode"
     });
     Nodes.insert({
-        title: 'Node 2',
-    });
-    Nodes.insert({
-        title: 'Node 3',
+        name: "OSU Node 1",
+        path: "NodePage"
     });
 }
+
 

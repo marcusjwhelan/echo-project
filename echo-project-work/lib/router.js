@@ -13,6 +13,9 @@ Router.configure({
   //    Meteor.subscribe('privateLists')
   //  ];
   //}
+  waitOn: function(){
+      return Meteor.subscribe('nodes');
+  }
 });
 
 //dataReadyHold = null;
@@ -29,6 +32,17 @@ Router.configure({
 
 Router.route('/',{name: 'Home'});
 Router.route('ExampleNode');
+Router.route('map');
+Router.route('graph')
+// This routes to the nodepage and 
+Router.route('/:_id', {
+  name: 'NodePage',
+    /*data: function() { return Nodes.findOne(
+        // this refers to the currently matched
+        //route.this.params access parts of route 
+        this.params._id); 
+    }*/
+});
 /*
 Router.route('listsShow', {
   path: '/lists/:_id',
