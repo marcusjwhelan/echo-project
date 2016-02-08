@@ -7,11 +7,7 @@ whichever template corresponds to the current
 route. -->
 <template name="layout">
   <div class="container">
-    <header class="navbar navbar-default" role="navigation"> 
-      <div class="navbar-header">
-        <a class="navbar-brand" href="{{pathFor 'postList'}}">Microscope</a>
-      </div>
-    </header>
+      {{> header}}
     <div id="main">
       {{> yield}}
     </div>

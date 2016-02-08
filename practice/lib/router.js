@@ -29,9 +29,39 @@ Router.route('/posts/:_id', {
         this.params._id); 
     }
 });
+// For users to make their own posts
+Router.route('/submit',{name: 'postSubmit'});
+// made to keep not logged in users from making 
+// posts
+var requireLogin = function(){
+  if(!Meteor.user()){
+    if(Meteor.loggingIn()){
+      // addthis so it checks the collection for a 
+      // user so not to load the templates first
+      // otherwisewillget a flash of accessDenied
+      this.render(this.loadingTemplate);
+    }else{
+      //if not a user take them to denied page
+        this.render('accessDenied');
+      }
+  }else{
+    // else go to the onBeforeAction area below
+    // and take them to the post page.
+    this.next();
+  }
+}
+
+
 // shows the 404 error page fornot just invalid
 // routesbut also for postPage route for false 
 // null , and undifined or empty data.
 Router.onBeforeAction('dataNotFound', {
     only: 'postPage'
-})
+});
+// this makes it that only loged in users 
+// can see the postSubmit page.
+Router.onBeforeAction(requireLogin,{only: 'postSubmit'});
+  
+  
+  
+  

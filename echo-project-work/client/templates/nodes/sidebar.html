@@ -1,0 +1,13 @@
+<template name="sidebar">
+    <ul class="sidebar-nav" id="sidebar" role="navigation">     
+        <div class="nodes">
+            {{#each nodes}}
+                <li>
+                    <a href="{{path}}">
+                        {{name}}
+                    </a>
+                </li>
+             {{/each}}
+        </div>
+    </ul>
+</template>

@@ -1,0 +1,82 @@
+/* CSS declarations go here */
+/*
+ * Base structure
+ */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+
+
+/*
+ * Global add-ons
+ */
+body {
+	font-family: 'Droid Sans', sans-serif;
+}
+.sub-header {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+	margin-left: 10px;
+}
+.sub-header p {
+	margin-right: auto;
+}
+.page-header{
+	padding: 0;
+	border-bottom:0;
+}
+
+/* -----------------------------------------------------------------------------
+										MINE 
+	--------------------------------------------------------------------------- */
+.container-fluid .jumbotron {
+    padding-right: 15px;
+    padding-left: 15px;
+    border-radius: 0px;
+}
+#main{
+	padding: 0px;
+}
+
+
+.jumbotron {
+	background-image: url('http://i.imgur.com/3EFcAPK.jpg?1');
+	height: 500px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	margin-bottom: 0;
+}
+.page-header{
+	padding-top: 150px;
+	font-family: 'Droid Sans', sans-serif;
+}
+.jumbotron h1{
+	color: #000;
+	font-size: 50px;
+	font-weight: bold;
+	text-align: center;
+	font-family: 'Orbitron', sans-serif;
+}
+p {
+	margin-left: 20px;
+	font-family: 'Droid Sans', sans-serif;
+}
+/*-----------------------------------------------------------------------------
+ * Placeholder dashboard ideas
+ */
+
+.placeholders {
+  margin-bottom: 30px;
+  text-align: center;
+}
+.placeholders h4 {
+  margin-bottom: 0;
+  font-family: 'Orbitron', sans-serif;
+}
+.placeholder {
+  margin-bottom: 20px;
+}
+.placeholder img {
+  display: inline-block;
+  border-radius: 50%;
+}
