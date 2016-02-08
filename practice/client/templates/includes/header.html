@@ -11,7 +11,21 @@
     </div>
     <div class="collapse navbar-collapse" id="navigation">
       <ul class="nav navbar-nav">
-        <li><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
+        <!--This is the new code and hides the link
+            if the user is not signed in-->
+        {{#if currentUser}}
+        <li>
+          <a href="{{pathFor 'postSubmit'}}">
+            SubmitPost
+          </a>
+        </li>
+        {{/if}}
+      <!-- This is where the path to the postSubmit
+      dropdown piece came from
+      
+      This was the old way and showed the link
+      <li><a href="{{pathFor 'postSubmit'}}">Submit Post</a></li>
+      -->
       </ul>
       <ul class="nav navbar-nav navbar-right">
         {{> loginButtons}}

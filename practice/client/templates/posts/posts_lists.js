@@ -9,6 +9,7 @@
 // /client/posts/posts_list.html
 Template.postsList.helpers({
     posts: function(){
-        return Posts.find();
+        return Posts.find({}, {sort: {submitted: -1}});
+        /*return Posts.find(); old*/
     }
 })
