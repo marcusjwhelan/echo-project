@@ -1,5 +1,5 @@
 Template.graph.helpers({
-    humidity: function(){
-        return Humidity.find();
+    humid: function(){
+        return Nodes.find();
     }
-})
+});

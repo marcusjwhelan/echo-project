@@ -1,10 +1,5 @@
 <template name="graph">
     Hello graphs
-    <!--<ul>
-        {{#each humidity}}
-            {{> hum}}
-        {{/each}}
-    </ul>-->
     <p>
         In this section I will have the site cycle through
         each collection of data inputs grabbing just
@@ -12,4 +7,11 @@
         page and create dynamic graphs of the incoming
         data.
     </p>
+    {{#each humid}}
+        <ul>{{name}}
+            {{#each humidity}}
+                <a>{{this}}</a>
+            {{/each}}
+        </ul>
+    {{/each}}
 </template>
