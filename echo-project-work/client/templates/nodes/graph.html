@@ -7,11 +7,11 @@
         page and create dynamic graphs of the incoming
         data.
     </p>
-    {{#each humid}}
-        <ul>{{name}}
-            {{#each humidity}}
-                <a>{{this}}</a>
-            {{/each}}
+    {{humid}}
+        <ul>{{node.name}}
+        {{#each node.humidity}}
+            <a>{{this}}</a>
+        {{/each}}
         </ul>
-    {{/each}}
+ 
 </template>
