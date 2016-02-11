@@ -7,10 +7,15 @@
         page and create dynamic graphs of the incoming
         data.
     </p>
-    {{humid}}
-        <ul>{{node.name}}
-        {{#each node.humidity}}
+    <p>
+     {{#with humid}}
+     <!-- Here name is actually calling the name function in ths js-->
+        <ul>{{name}}
+        <!-- This is refering the the returned object of the #humid
+        function from the js file of this html-->
             <a>{{this}}</a>
-        {{/each}}
         </ul>
+     {{/with}}
+    </p>
+    
 </template>
