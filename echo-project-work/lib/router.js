@@ -33,7 +33,12 @@ Router.configure({
 Router.route('/',{name: 'Home'});
 Router.route('ExampleNode');
 Router.route('map');
-Router.route('graph')
+Router.route('humidity');
+Router.route('temperature');
+Router.route('dewPoint');
+Router.route('windSpeed');
+Router.route('windDirection');
+
 // This routes to the nodepage and 
 Router.route('/:_id', {
   name: 'NodePage',
