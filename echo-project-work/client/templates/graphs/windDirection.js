@@ -27,10 +27,96 @@ Template.windDirection.helpers({
         return node.direction.length;
       }
     }
-  },
-  createChart: function(){
   }
 });
+/*----------------------------------------------------
+-------------Added random button and graph------------
+------------------------------------------------------*/
+var chart;
+function lineChart(){
+  if(Router.current().params._id){
+      let node = Nodes.findOne({_id: Router.current().params._id});
+      if(node){
+        var data = []; 
+        if(node.direction.length<20){
+          for(i=0; i<node.direction.length;i++){
+            data.push(node.direction[i]);
+          }
+        }
+        else{
+          for(i=0; i<20;i++){
+            data.push(node.direction[i]);
+          }
+        }
+        chart = $('#line-chart-container').highcharts({
+          title: {
+            text: ' ',
+            x: -20 // center?
+          },
+          xAxis: {
+            catagories:[]
+          },
+          yAxis: {
+            title: {
+              text: 'Degree'
+            },
+            plotLines:[{
+              value: 0,
+              width: 1,
+              color: '#808080'
+            }]
+          },
+          tooltip:{
+            valueSuffix: ' + degrees'
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+          },
+          series: [{
+            name: 'Direction',
+            data: data
+          }/*if you have more than one plot
+          on the graph add a 
+          {
+            name: 'a;dslkj',
+            data: ;;lkj
+          },*/],
+          credits: {
+            enabled: false
+          }
+        });
+      }
+    }
+}
+
+Template.windDirection.rendered = function(){
+  Tracker.autorun(function(){
+    lineChart();
+  });
+}
+
+Template.windDirection.events({
+  // add new random value to this particular node
+  'click #add-value': function(){
+    var windD = Math.floor((Math.random()*360)+0);
+    if(Router.current().params._id){
+      let node = Nodes.findOne({_id: Router.current().params._id});
+      if(node){
+        var data = node.direction; 
+        Nodes.update({_id: Router.current().params._id},{$push:{direction: 
+        {$each: [windD],$position: 0}}});
+      }
+    }
+  }
+});
+
+
+
+
+
 /*
 Template.windDirection.created = function(){
   var self = this;
