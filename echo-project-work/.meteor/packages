@@ -20,3 +20,7 @@ twbs:bootstrap
 iron:router
 sacha:spin
 insecure
+highcharts:highcharts-meteor
+
+
+highcharts-container

@@ -1,5 +1,6 @@
 if(Nodes.find().count() === 0){
     Nodes.insert({
+        _id: "OSUNode1",
         name: "OSU Node 1",
         gps: '134.234.78.545',
         humidity: [80,81,82,83,85,86,87,88,89,88],
@@ -11,6 +12,7 @@ if(Nodes.find().count() === 0){
     
     });
     Nodes.insert({
+        _id: "StormNode1",
         name: "Storm Node 1",
         gps: '123.323.12.321',
         humidity: [77,76,78,76,76,75,77,78,78,79,80],
