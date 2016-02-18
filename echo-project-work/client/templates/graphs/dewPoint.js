@@ -55,6 +55,15 @@ function lineChart5(){
             data.push(node.dew[i]);
           }
         }
+        //=============================================
+        //  For some reason this make the time correct
+        //=============================================
+        Highcharts.setOptions({
+          global: {
+            useUTC: false
+          }
+        });
+        //==============================================
         chart5 = $('#line-chart-container5').highcharts({
           /*title: {
             text: ' ',
