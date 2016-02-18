@@ -27,69 +27,96 @@ Template.windDirection.helpers({
         return node.direction.length;
       }
     }
-  },
-  createChart: function(){
-        //Use meteor.defer() to create chart after DOM is ready:
-        Meteor.defer(function(){
-          //create standar highcharts chart withoptions:
-          HighCharts.chart({
-            
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: 'Browser market shares January, 2015 to May, 2015'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: true,
-                    format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                    style: {
-                        color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                    }
-                }
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Microsoft Internet Explorer',
-                y: 56.33
-            }, {
-                name: 'Chrome',
-                y: 24.03,
-                sliced: true,
-                selected: true
-            }, {
-                name: 'Firefox',
-                y: 10.38
-            }, {
-                name: 'Safari',
-                y: 4.77
-            }, {
-                name: 'Opera',
-                y: 0.91
-            }, {
-                name: 'Proprietary or Undetectable',
-                y: 0.2
+  }
+});
+/*----------------------------------------------------
+-------------Added random button and graph------------
+------------------------------------------------------*/
+var chart;
+function lineChart(){
+  if(Router.current().params._id){
+      let node = Nodes.findOne({_id: Router.current().params._id});
+      if(node){
+        var data = []; 
+        if(node.direction.length<20){
+          for(i=0; i<node.direction.length;i++){
+            data.push(node.direction[i]);
+          }
+        }
+        else{
+          for(i=0; i<20;i++){
+            data.push(node.direction[i]);
+          }
+        }
+        chart = $('#line-chart-container').highcharts({
+          title: {
+            text: ' ',
+            x: -20 // center?
+          },
+          xAxis: {
+            catagories:[]
+          },
+          yAxis: {
+            title: {
+              text: 'Degree'
+            },
+            plotLines:[{
+              value: 0,
+              width: 1,
+              color: '#808080'
             }]
-        }]
-    
-
-          });
+          },
+          tooltip:{
+            valueSuffix: ' + degrees'
+          },
+          legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'middle',
+            borderWidth: 0
+          },
+          series: [{
+            name: 'Direction',
+            data: data
+          }/*if you have more than one plot
+          on the graph add a 
+          {
+            name: 'a;dslkj',
+            data: ;;lkj
+          },*/],
+          credits: {
+            enabled: false
+          }
         });
       }
+    }
+}
+
+Template.windDirection.rendered = function(){
+  Tracker.autorun(function(){
+    lineChart();
+  });
+}
+
+Template.windDirection.events({
+  // add new random value to this particular node
+  'click #add-value': function(){
+    var windD = Math.floor((Math.random()*360)+0);
+    if(Router.current().params._id){
+      let node = Nodes.findOne({_id: Router.current().params._id});
+      if(node){
+        var data = node.direction; 
+        Nodes.update({_id: Router.current().params._id},{$push:{direction: 
+        {$each: [windD],$position: 0}}});
+      }
+    }
+  }
 });
+
+
+
+
+
 /*
 Template.windDirection.created = function(){
   var self = this;
