@@ -10,3 +10,7 @@ Template.sidebar.helpers({
     }
 });
 
+Template.sidebar.onCreated(function () {
+    this.subscribe('nodes');
+});
+

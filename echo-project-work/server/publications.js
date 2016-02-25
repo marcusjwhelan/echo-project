@@ -5,11 +5,6 @@
 
 // Lets publish only the last 20 points of data
 // from each Node
-Meteor.publish(
-  'nodes', function(){
-    return Nodes.find();
-  }/*,
-  'names', function(){
-    return Names.find();
-  }*/
-);
+Meteor.publish('nodes',function(){
+  return Nodes.find();
+});

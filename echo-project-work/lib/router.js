@@ -42,10 +42,15 @@ Router.route('windDirection');
 // This routes to the nodepage and 
 Router.route('/:name', {
   name: 'NodePage',
-    data: function() { 
-      return Nodes.findOne({name: this.params.name}); 
-    }
+  template: 'NodePage',
+  data: function(){
+    return Nodes.findOne(this.params.name);
+  },
+  waitOn: function(){
+    return Meteor.subscribe('nodes',name);
+  }
 });
+
 /*
 Router.route('listsShow', {
   path: '/lists/:_id',

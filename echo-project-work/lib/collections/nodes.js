@@ -20,11 +20,11 @@ Schemas.Node = new SimpleSchema({
 		unique: false,
 // 		lets have short names please
 		max: 20,
-		custom: function(){
+		/*custom: function(){
 			if(this.insert){
 				//Names.insert(name: "name");
 			}
-		}
+		}*/
 	},
   	createdAt: {
 		type: Date,
