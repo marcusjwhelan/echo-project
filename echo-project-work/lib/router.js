@@ -40,12 +40,10 @@ Router.route('windSpeed');
 Router.route('windDirection');
 
 // This routes to the nodepage and 
-Router.route('/:_id', {
+Router.route('/:name', {
   name: 'NodePage',
-    data: function() { return Nodes.findOne(
-        // this refers to the currently matched
-        //route.this.params access parts of route 
-        this.params._id); 
+    data: function() { 
+      return Nodes.findOne({name: this.params.name}); 
     }
 });
 /*
