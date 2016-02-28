@@ -1,16 +1,23 @@
 Template.sidebar.helpers({
     nodes: function(){
-        /*var distinctEntries = _.uniq(Nodes.find({}, 
-        {sort: {name:1}, fields: 
-        {name:true}}).fetch().map(function(x) {
-        return x.name;
-        }), true);*/
-        var wow = _.uniq(_.pluck(Nodes.find().fetch(),"name"));
-        return wow;
+        //make array to hold objects
+        var myObjectArray = [];
+        // grab entire collection
+        var nodeCollection=  Nodes.find().fetch();
+        // Get the unique names from collection
+        var nodeNames = _.uniq(_.pluck(nodeCollection,'name'));
+        // find the Node with that name and
+        // place into object array loop till done
+        for(i=nodeNames.length; i>0;i--){
+            var arrayItem = nodeNames[i-1];
+            var nodeObject = Nodes.findOne({name: arrayItem});
+            myObjectArray.push(nodeObject);
+        }
+        return myObjectArray;
+        
     }
 });
-
-Template.sidebar.onCreated(function () {
+/*Template.sidebar.onCreated(function () {
     this.subscribe('nodes');
 });
-
+*/

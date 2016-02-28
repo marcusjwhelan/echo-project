@@ -24,8 +24,7 @@
     });
 }
 */
-var name1 = { name: "OSU Node 1"};
-var name2 = { name: "Tulsa Node"};
+
 
 var sampleInput_1 ={
   name: "OSU Node 1",

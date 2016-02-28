@@ -38,19 +38,13 @@ Router.route('temperature');
 Router.route('dewPoint');
 Router.route('windSpeed');
 Router.route('windDirection');
-
-// This routes to the nodepage and 
+// This routes to the nodepage 
 Router.route('/:name', {
-  name: 'NodePage',
-  template: 'NodePage',
-  data: function(){
-    return Nodes.findOne(this.params.name);
-  },
-  waitOn: function(){
-    return Meteor.subscribe('nodes',name);
-  }
-});
-
+    name: 'NodePage',
+    data: function(){
+    return Nodes.findOne({name: this.params.name});
+    },
+  });
 /*
 Router.route('listsShow', {
   path: '/lists/:_id',

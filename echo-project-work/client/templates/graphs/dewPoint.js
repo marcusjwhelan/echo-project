@@ -26,14 +26,6 @@ Template.dewPoint.helpers({
       }
     }
   },*/
-  count: function(){
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        return node.dew.length;
-      }
-    }
-  }
 });
 
 /*----------------------------------------------------
@@ -41,8 +33,8 @@ Template.dewPoint.helpers({
 ------------------------------------------------------*/
 var chart5;
 function lineChart5(){
-  if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
+  if(Router.current().params.name){
+      let node = Nodes.findOne({name: Router.current().params.name});
       if(node){
         var data = []; 
         if(node.dew.length<20){
