@@ -33,20 +33,7 @@ Template.dewPoint.helpers({
 ------------------------------------------------------*/
 var chart5;
 function lineChart5(){
-  if(Router.current().params.name){
-      let node = Nodes.findOne({name: Router.current().params.name});
-      if(node){
-        var data = []; 
-        if(node.dew.length<20){
-          for(i=0; i<node.dew.length;i++){
-            data.push(node.dew[i]);
-          }
-        }
-        else{
-          for(i=0; i<20;i++){
-            data.push(node.dew[i]);
-          }
-        }
+
         //=============================================
         //  For some reason this make the time correct
         //=============================================
@@ -57,47 +44,6 @@ function lineChart5(){
         });
         //==============================================
         chart5 = $('#line-chart-container5').highcharts({
-          /*title: {
-            text: ' ',
-            x: -20 // center?
-          },
-          xAxis: {
-            catagories:[]
-          },
-          yAxis: {
-            title: {
-              text: 'Dew Point'
-            },
-            plotLines:[{
-              value: 0,
-              width: 1,
-              color: '#808080'
-            }]
-          },
-          tooltip:{
-            valueSuffix: ' + %'
-          },
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-          },
-          series: [{
-            name: 'dew point',
-            data: data
-          }
-          *if you have more than one plot
-          *on the graph add a 
-          *{
-          *  name: 'a;dslkj',
-          *  data: ;;lkj
-          *},//],
-          credits: {
-            enabled: false
-          }*/
-          
-          
           /*All Right. Copy and paste here but it works. Now to figure out how
           this works and get my data to load on here.*/
           chart: {
@@ -183,8 +129,8 @@ function lineChart5(){
           
         });
       }
-    }
-}
+    
+
 // Needed to render chart on load of page.
 Template.dewPoint.rendered = function(){
   Tracker.autorun(function(){

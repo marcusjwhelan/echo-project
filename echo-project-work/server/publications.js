@@ -6,5 +6,5 @@
 // Lets publish only the last 20 points of data
 // from each Node
 Meteor.publish('nodes',function(){
-  return Nodes.find();
+    return Nodes.find();
 });
