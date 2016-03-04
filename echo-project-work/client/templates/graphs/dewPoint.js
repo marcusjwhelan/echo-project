@@ -33,15 +33,16 @@ Template.dewPoint.helpers({
 ------------------------------------------------------*/
 var chart5;
 function lineChart5(){
-
+  if(Router.current().params){
         //=============================================
         //  For some reason this make the time correct
         //=============================================
-        Highcharts.setOptions({
+        Highcharts.setOptions( Highcharts.theme
+          /*{
           global: {
             useUTC: false
           }
-        });
+        }*/);
         //==============================================
         chart5 = $('#line-chart-container5').highcharts({
           /*All Right. Copy and paste here but it works. Now to figure out how
@@ -129,7 +130,7 @@ function lineChart5(){
           
         });
       }
-    
+}
 
 // Needed to render chart on load of page.
 Template.dewPoint.rendered = function(){

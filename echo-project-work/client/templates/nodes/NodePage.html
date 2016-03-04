@@ -1,21 +1,8 @@
 <template name="NodePage">
-    <h1>
-        This is the nodepage 
-        it will dynamically show
-        charts of data.
-    </h1>
     <div class="Map">
         {{> map}}
     </div>
-        <p>
-            In this section I will have the site cycle through
-            each collection of data inputs grabbing just
-            the ones for the particular node I want for the
-            page and create dynamic graphs of the incoming
-            data.
-        </p>
     <div class="Graphs">
-        {{name}}
         {{> windDirection}}
         {{> windSpeed}}
         {{> temperature}}

@@ -37,168 +37,6 @@ function lineChart(){
         //  For some reason this make the time correct
         //=============================================
         
-        
-        
-        
-  Highcharts.theme = {
-    // OSU ORANGE
-    colors: ['rgb(217,89,0)'],
-    chart: {
-      backgroundColor: '#252525'
-      /*{
-        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-          stops: [
-            [0, 'rgb(96, 96, 96)'],
-            [1, 'rgb(16, 16, 16)']
-          ]
-      }*/,
-      borderWidth: 0,
-      borderRadius: 0,
-      plotBackgroundColor: null,
-      plotShadow: false,
-      plotBorderWidth: 0
-    },
-    title: {
-      style: {
-        color: '#FFF',
-        font: '16px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
-      }
-    },
-    subtitle: {
-      style: {
-        color: '#DDD',
-        font: '12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
-      }
-    },
-    xAxis: {
-      gridLineWidth: 0,
-      lineColor: '#999',
-      tickColor: '#999',
-      labels: {
-        style: {
-          color: '#999',
-          fontWeight: 'bold'
-        }
-      },
-      title: {
-        style: {
-          color: '#AAA',
-          font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
-        }
-      }
-    },
-    yAxis: {
-      alternateGridColor: null,
-      minorTickInterval: null,
-      gridLineColor: 'rgba(255, 255, 255, .1)',
-      minorGridLineColor: 'rgba(255,255,255,0.07)',
-      lineWidth: 0,
-      tickWidth: 0,
-      labels: {
-        style: {
-          color: '#999',
-          fontWeight: 'bold'
-        }
-      },
-      title: {
-        style: {
-          color: '#AAA',
-          font: 'bold 12px Lucida Grande, Lucida Sans Unicode, Verdana, Arial, Helvetica, sans-serif'
-        }
-      }
-    },
-    legend: {
-      itemStyle: {
-        color: '#CCC'
-      },
-      itemHoverStyle: {
-        color: '#FFF'
-      },
-      itemHiddenStyle: {
-        color: '#333'
-      }
-    },
-    labels: {
-      style: {
-        color: '#CCC'
-      }
-    },
-    tooltip: {
-      backgroundColor: {
-        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-        stops: [
-          [0, 'rgba(96, 96, 96, .8)'],
-          [1, 'rgba(16, 16, 16, .8)']
-        ]
-      },
-      borderWidth: 0,
-      style: {
-        color: '#FFF'
-      }
-    },
-    plotOptions: {
-      series: {
-        nullColor: '#444444'
-      },
-      line: {
-        dataLabels: {
-          color: '#CCC'
-        },
-        marker: {
-          lineColor: '#333'
-        }
-      },
-      spline: {
-        marker: {
-          lineColor: '#333'
-        }  
-      },
-      scatter: {
-        marker: {
-          lineColor: '#333'
-        }
-      },
-      candlestick: {
-        lineColor: 'white'
-      }
-    },
-    toolbar: {
-      itemStyle: {
-        color: '#CCC'
-      }
-    },
-    navigation: {
-      buttonOptions: {
-        symbolStroke: '#DDDDDD',
-          hoverSymbolStroke: '#FFFFFF',
-            theme: {
-              fill: {
-                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
-                  stops: [
-                    [0.4, '#606060'],
-                    [0.6, '#333333']
-                  ]
-              },
-              stroke: '#000000'
-            } 
-      }
-    },
-    global: {
-            useUTC: false
-          }
-  };
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
         Highcharts.setOptions( Highcharts.theme
         /*{
           global: {
@@ -241,11 +79,12 @@ function lineChart(){
                           // at position 0
                           var series = this.series[0];
                           console.log(this.series[0]);
+                          var what = series.data[19].y;
                           setInterval(function () {
-                               var x = newTime[0].getTime();
-                               var y = newDirection[0];
+                               var x = (new Date()).getTime();//newTime[0].getTime();
+                               var y = this.series.data[19].y;//newDirection[0];
                               series.addPoint([x, y], true, true);
-                          }, 200000);
+                          }, 2000);
                         }
                     }
                 }
