@@ -37,15 +37,15 @@ Template.map.onCreated(function() {
 
     // Create and move the marker when latLng changes.
     Tracker.autorun(function() {
+      let node = Nodes.findOne({ name: Router.current().params.name });
+      if( node ) {
       var latLng = Geolocation.latLng();
       if (! latLng)
         return;
     
-      let node = Nodes.findOne({ name: Router.current().params.name });
-      if( node ) {
+      
         // get the name from the current station's page we are on. through the router.
         var nodeName = node.name;
-        console.log(nodeName);
         // grab the last 20 of this Nodes collection
         var redentNode = Nodes.find({name: nodeName},
                                       {sort:{createdAt: -1},limit: 1}).fetch();
@@ -54,21 +54,23 @@ Template.map.onCreated(function() {
         /*-----------------------get the latitude ----------------------------------*/
         var lon = _.pluck(redentNode,'longitude');
         /*----------------------------------------------------------------------*/
-        if(!marker){
-        // If the marker doesn't yet exist, create it.
-          marker = new google.maps.Marker({
-            position: new google.maps.LatLng(lat,lon),
-            map: map.instance
-          });
+        /* if there is a marker. IE there will be one after you
+        have visited another page with a node. This will delete 
+        all nodes so there can't be infinite markers on map.*/
+        if(marker){
+          marker.setMap(null);
         }
-        // The marker already exists, so we'll just change its position.
-        else{
-          marker.setPosition(latLng);
-        }
+        
+        marker = new google.maps.Marker({
+          position: new google.maps.LatLng(lat,lon),
+          map:map.instance
+        });
+        
         // Center and zoom the map view onto the current position.
         map.instance.setCenter(marker.getPosition());
         map.instance.setZoom(MAP_ZOOM);
       }
+      
     });
   });
 });

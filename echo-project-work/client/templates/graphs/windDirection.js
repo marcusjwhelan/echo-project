@@ -63,7 +63,7 @@ function lineChart(){
                           // grab the last 20 of this Nodes collection
                           var newDirectionObject = Nodes.find({name: nodeName},
                                                         {sort:{createdAt: -1},limit: 1}).fetch();
-                                                        
+                    
                           /*-----------------------get the directions-----------------------------*/
                           // Get the an array of just the directions of these 20 objects
                           var newDirection = _.pluck(newDirectionObject,'direction');
@@ -78,7 +78,6 @@ function lineChart(){
                           // set up the updating 4 seconds
                           // at position 0
                           var series = this.series[0];
-                          console.log(this.series[0]);
                           var what = series.data[19].y;
                           setInterval(function () {
                                var x = (new Date()).getTime();//newTime[0].getTime();
