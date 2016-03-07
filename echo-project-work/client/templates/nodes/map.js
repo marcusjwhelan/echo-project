@@ -10,12 +10,12 @@ Template.map.helpers({
       // get the name from the current station's page we are on. through the router.
       var nodeName = node.name;
       // grab the last 20 of this Nodes collection
-      var redentNode = Nodes.find({name: nodeName},
-                                    {sort:{createdAt: -1},limit: 1}).fetch();
+      var recentNode = Nodes.find({name: nodeName},
+          {sort:{createdAt: -1},limit: 1}).fetch();
       /*-----------------------get the longitude-----------------------------*/
-      var lat = _.pluck(redentNode,'latitude');
+      var lat = _.pluck(recentNode,'latitude');
       /*-----------------------get the latitude ----------------------------------*/
-      var lon = _.pluck(redentNode,'longitude');
+      var lon = _.pluck(recentNode,'longitude');
       /*----------------------------------------------------------------------*/
     }
     var latLng = Geolocation.latLng();
@@ -43,16 +43,15 @@ Template.map.onCreated(function() {
       if (! latLng)
         return;
     
-      
         // get the name from the current station's page we are on. through the router.
         var nodeName = node.name;
         // grab the last 20 of this Nodes collection
-        var redentNode = Nodes.find({name: nodeName},
-                                      {sort:{createdAt: -1},limit: 1}).fetch();
+        var recentNode = Nodes.find({name: nodeName},
+         {sort:{createdAt: -1},limit: 1}).fetch();
         /*-----------------------get the longitude-----------------------------*/
-        var lat = _.pluck(redentNode,'latitude');
+        var lat = _.pluck(recentNode,'latitude');
         /*-----------------------get the latitude ----------------------------------*/
-        var lon = _.pluck(redentNode,'longitude');
+        var lon = _.pluck(recentNode,'longitude');
         /*----------------------------------------------------------------------*/
         /* if there is a marker. IE there will be one after you
         have visited another page with a node. This will delete 

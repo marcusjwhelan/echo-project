@@ -1,31 +1,5 @@
 Template.windDirection.helpers({
-  /*currentA: function() {
-    if( Router.current().params._id ) {
-      let node = Nodes.findOne({ _id: Router.current().params._id });
-      if( node ) {
-        var tempArray = [];
-        if(node.dew.length<20){
-          for(i=0; i<node.dew.length;i++){
-            tempArray.push(node.dew[i]);
-          }
-        }
-        else{
-          for(i=0; i<20;i++){
-            tempArray.push(node.dew[i]);
-          }
-        }
-        return tempArray;
-      }
-    }
-  },*//*
-  name: function(){
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        return node.name;
-      }
-    }
-  },*/
+ 
 });
 
 /*----------------------------------------------------
@@ -74,16 +48,19 @@ function lineChart(){
                           // Get the an array of just the directions of these 20 objects
                           var newTime = _.pluck(newDirectionObject,'createdAt');
                           /*----------------------------------------------------------------------*/
-                        }
+                        //}
                           // set up the updating 4 seconds
                           // at position 0
                           var series = this.series[0];
-                          var what = series.data[19].y;
+                          
                           setInterval(function () {
-                               var x = (new Date()).getTime();//newTime[0].getTime();
-                               var y = this.series.data[19].y;//newDirection[0];
-                              series.addPoint([x, y], true, true);
-                          }, 2000);
+                               var x = newTime[0].getTime(); //(new Date()).getTime();
+                               var y = newDirection[0]; //this.series.data[19].y;
+                               //series.data[0].update([x,y],true,true);
+                              //series.addPoint([x, y], false, true);
+                          }, 4000);
+                          
+                        }
                         }
                     }
                 }
@@ -149,7 +126,7 @@ function lineChart(){
                       // Get the an array of just the directions of these 20 objects
                       var timeArray = _.pluck(directionCollection_20,'createdAt');
                       /*----------------------------------------------------------------------*/
-                    }
+                    
                     
                     // create the data array
                     var data = [];
@@ -157,7 +134,7 @@ function lineChart(){
                       lets fill the data array with the total number of objets + 
                       the time of each insert in the collection and the data for this graph
                     -------------------------------------------------------------------------*/
-                    for (i = 19; i >= 0; i -= 1) {
+                    for (var i = 19; i >= 0; i -= 1) {
                       // add to the array
                         data.push({
                           // add the x value. = to the time
@@ -166,6 +143,7 @@ function lineChart(){
                             y: direction_Array[i]
                         });
                     }
+                }
                     return data;
                 }())
             }],
@@ -185,6 +163,7 @@ Template.windDirection.rendered = function(){
     lineChart();
   });
 }
+
 /*
 Template.windDirection.events({
   // add new random value to this particular node

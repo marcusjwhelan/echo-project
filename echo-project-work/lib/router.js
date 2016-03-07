@@ -13,9 +13,7 @@ Router.configure({
   //    Meteor.subscribe('privateLists')
   //  ];
   //}
-  waitOn: function(){
-      return Meteor.subscribe('nodes');
-  }
+  
 });
 
 //dataReadyHold = null;
@@ -44,6 +42,9 @@ Router.route('/:name', {
     data: function(){
     return Nodes.findOne({name: this.params.name});
     },
+    waitOn: function(){
+      return Meteor.subscribe('nodes',this.params.name);
+  },
   });
 /*
 Router.route('listsShow', {

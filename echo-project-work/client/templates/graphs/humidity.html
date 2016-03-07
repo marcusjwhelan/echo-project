@@ -1,17 +1,5 @@
 <template name="humidity">
     <h2>Humidity</h2>
-    <p>
-     {{#with humid}}
-     <!-- Here name is actually calling the name function in ths js-->
-        <ul>Array of humidity points<br>
-        <!-- This is refering the the returned object of the #humid
-        function from the js file of this html-->
-            <a>{{this}}</a>
-        </ul>
-     {{/with}}
-    </p>
     <div id="line-chart-container4"></div>
-    <button id="add-value4">Random Humidity</button>
-    <p>{{count}} Data points</p>
-    
+    <button id="add-value4">Download</button>
 </template>

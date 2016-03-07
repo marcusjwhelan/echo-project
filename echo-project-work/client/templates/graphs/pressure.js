@@ -1,39 +1,5 @@
 Template.pressure.helpers({
-  currentA: function() {
-    if( Router.current().params._id ) {
-      let node = Nodes.findOne({ _id: Router.current().params._id });
-      if( node ) {
-        var tempArray = [];
-        if(node.pressure.length<20){
-          for(i=0; i<node.pressure.length;i++){
-            tempArray.push(node.pressure[i]);
-          }
-        }
-        else{
-          for(i=0; i<20;i++){
-            tempArray.push(node.pressure[i]);
-          }
-        }
-        return tempArray;
-      }
-    }
-  },/*
-  name: function(){
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        return node.name;
-      }
-    }
-  },*/
-  count: function(){
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        return node.pressure.length;
-      }
-    }
-  }
+
 });
 
 /*----------------------------------------------------
@@ -41,62 +7,154 @@ Template.pressure.helpers({
 ------------------------------------------------------*/
 var chart3;
 function lineChart3(){
-  if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        var data = []; 
-        if(node.pressure.length<20){
-          for(i=0; i<node.pressure.length;i++){
-            data.push(node.pressure[i]);
+        //=============================================
+        //  For some reason this make the time correct
+        //=============================================
+        
+        Highcharts.setOptions( Highcharts.theme
+        /*{
+          global: {
+            useUTC: false
           }
-        }
-        else{
-          for(i=0; i<20;i++){
-            data.push(node.pressure[i]);
-          }
-        }
+        }*/
+        );
+        //==============================================
         chart3 = $('#line-chart-container3').highcharts({
-          title: {
-            text: ' ',
-            x: -20 // center?
-          },
-          xAxis: {
-            catagories:[]
-          },
-          yAxis: {
-            title: {
-              text: 'Pounds per square inch'
+          /*All Right. Copy and paste here but it works. Now to figure out how
+          this works and get my data to load on here.*/
+          chart: {
+                type: 'spline',
+                animation: Highcharts.svg, // don't animate in old IE
+                marginRight: 10,
+                events: {
+                  /* Here we need to load the data we set, and also reload every 4 seconds*/
+                    load: function () {
+                      if(Router.current().params.name){
+                        let node = Nodes.findOne({ name: Router.current().params.name });
+                        if( node ) {
+                          // get the name from the current station's page we are on. through the router.
+                          var nodeName = node.name;
+                          // grab the last 20 of this Nodes collection
+                          var newPressureObject = Nodes.find({name: nodeName},
+                                    {sort:{createdAt: -1},limit: 1}).fetch();
+                    
+                          /*-----------------------get the Pressures-----------------------------*/
+                          // Get the an array of just the Pressures of these 20 objects
+                          var newPressure = _.pluck(newPressureObject,'pressure');
+                          /*----------------------------------------------------------------------*/
+                          
+                          /*-----------------------get the time ----------------------------------*/
+                          // grab the last 20 of this Nodes collection
+                          // Get the an array of just the Pressures of these 20 objects
+                          var newTime = _.pluck(newPressureObject,'createdAt');
+                          /*----------------------------------------------------------------------*/
+                        //}
+                          // set up the updating 4 seconds
+                          // at position 0
+                          var series = this.series[0];
+                          
+                          setInterval(function () {
+                               var x = newTime[0].getTime(); //(new Date()).getTime();
+                               var y = newPressure[0]; //this.series.data[19].y;
+                               //series.data[0].update([x,y],true,true);
+                              //series.addPoint([x, y], true, true);
+                          }, 4000);
+                          
+                          }
+                        }
+                    }
+                }
             },
-            plotLines:[{
-              value: 0,
-              width: 1,
-              color: '#808080'
-            }]
-          },
-          tooltip:{
-            valueSuffix: ' + PSI'
-          },
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-          },
-          series: [{
-            name: 'pressure',
-            data: data
-          }/*if you have more than one plot
-          on the graph add a 
-          {
-            name: 'a;dslkj',
-            data: ;;lkj
-          },*/],
-          credits: {
+            title: {
+                text: ' '
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    text: 'miles per hour'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function () {
+                  /*This.series.name gets Line name made in series below
+                  Next formats the date and time which is pushed in the
+                  series = x. y= the random data point*/
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%d-%m-%Y %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            /* This shows the name of the line*/
+            legend: {
+                enabled: false
+            },
+            // Not sure?
+            exporting: {
+                enabled: false
+            },
+            series: [{
+              // Line name
+                name: 'Pressure',
+                /* Here is where the data is coming form
+                Make sure to retrieve needed data for the
+                graph here.*/
+                data: (function () {
+                    // generate an array of random data
+                    let node = Nodes.findOne({ name: Router.current().params.name });
+                    if( node ) {
+                      // get the name from the current station's page we are on. through the router.
+                      var nodeName = node.name;
+                      // grab the last 20 of this Nodes collection
+                      var PressureCollection_20 = Nodes.find({name: nodeName},
+                              {sort:{createdAt: -1},limit: 20}).fetch();
+                                                    
+                      /*-----------------------get the Pressures-----------------------------*/
+                      // Get the an array of just the Pressures of these 20 objects
+                      var Pressure_Array = _.pluck(PressureCollection_20,'pressure');
+                      /*----------------------------------------------------------------------*/
+                      
+                      /*-----------------------get the time ----------------------------------*/
+                      // grab the last 20 of this Nodes collection
+                      // Get the an array of just the Pressures of these 20 objects
+                      var timeArray = _.pluck(PressureCollection_20,'createdAt');
+                      /*----------------------------------------------------------------------*/
+                    
+                    
+                    // create the data array
+                    var data = [];
+                    /* ----------------------------------------------------------------------
+                      lets fill the data array with the total number of objets + 
+                      the time of each insert in the collection and the data for this graph
+                    -------------------------------------------------------------------------*/
+                    for (var i = 19; i >= 0; i -= 1) {
+                      // add to the array
+                        data.push({
+                          // add the x value. = to the time
+                            x: timeArray[i].getTime(),
+                          // add the y. equal to the incoming data
+                            y: Pressure_Array[i]
+                        });
+                    }
+                }
+                    return data;
+                }())
+            }],
+            // Added to get rid of the Highcharts
+            // water mark.
+            credits: {
             enabled: false
           }
-        });
-      }
-    }
+          /*----------------------------------------------------*/
+          
+    });
 }
 
 Template.pressure.rendered = function(){
@@ -105,17 +163,3 @@ Template.pressure.rendered = function(){
   });
 }
 
-Template.pressure.events({
-  // add new random value to this particular node
-  'click #add-value3': function(){
-    var rand = Math.floor((Math.random()*(38-22))+22);
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        var data = node.pressure; 
-        Nodes.update({_id: Router.current().params._id},{$push:{pressure: 
-        {$each: [rand],$position: 0}}});
-      }
-    }
-  }
-});

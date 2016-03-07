@@ -1,39 +1,5 @@
 Template.windSpeed.helpers({
-  /*currentA: function() {
-    if( Router.current().params._id ) {
-      let node = Nodes.findOne({ _id: Router.current().params._id });
-      if( node ) {
-        var tempArray = [];
-        if(node.speed.length<20){
-          for(i=0; i<node.speed.length;i++){
-            tempArray.push(node.speed[i]);
-          }
-        }
-        else{
-          for(i=0; i<20;i++){
-            tempArray.push(node.speed[i]);
-          }
-        }
-        return tempArray;
-      }
-    }
-  },/*
-  name: function(){
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        return node.name;
-      }
-    }
-  },
-  count: function(){
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        return node.speed.length;
-      }
-    }
-  }*/
+
 });
 
 /*----------------------------------------------------
@@ -41,81 +7,154 @@ Template.windSpeed.helpers({
 ------------------------------------------------------*/
 var chart1;
 function lineChart1(){
-  if(Router.current().params._id){
-
-        let node = Nodes.findOne({ name: Router.current().params.name });
-        if( node ) {
-          // get the name from the current station's page we are on. through the router.
-          var nodeName = node.name;
-          // grab the last 20 of this Nodes collection
-          var speedCollection_20 = Nodes.find({name: nodeName},
-                                        {sort:{createdAt: -1},limit: 20}).fetch();
-                                        
-          /*-----------------------get the directions-----------------------------*/
-          // Get the an array of just the directions of these 20 objects
-          var speedArray = _.pluck(speedCollection_20,'speed');
-          /*----------------------------------------------------------------------*/
-          
-          /*-----------------------get the time ----------------------------------*/
-          // grab the last 20 of this Nodes collection
-          // Get the an array of just the directions of these 20 objects
-          var timeArray = _.pluck(speedCollection_20,'createdAt');
-          /*----------------------------------------------------------------------*/
-        }
+        //=============================================
+        //  For some reason this make the time correct
+        //=============================================
         
-        // create the data array
-        var data = [];
-        /* ----------------------------------------------------------------------
-          lets fill the data array with the total number of objets + 
-          the time of each insert in the collection and the data for this graph
-        -------------------------------------------------------------------------*/
-        for (i = 19; i >= 0; i -= 1) {
-          // add to the array
-            data.push({
-              // add the x value. = to the time
-                x: timeArray[i].getTime(),
-              // add the y. equal to the incoming data
-                y: speedArray[i]
-            });
-        }
-
+        Highcharts.setOptions( Highcharts.theme
+        /*{
+          global: {
+            useUTC: false
+          }
+        }*/
+        );
+        //==============================================
         chart1 = $('#line-chart-container1').highcharts({
-          title: {
-            text: ' ',
-            x: -20 // center?
-          },
-          xAxis: {
-            catagories:[]
-          },
-          yAxis: {
-            title: {
-              text: 'Miles per hour'
+          /*All Right. Copy and paste here but it works. Now to figure out how
+          this works and get my data to load on here.*/
+          chart: {
+                type: 'spline',
+                animation: Highcharts.svg, // don't animate in old IE
+                marginRight: 10,
+                events: {
+                  /* Here we need to load the data we set, and also reload every 4 seconds*/
+                    load: function () {
+                      if(Router.current().params.name){
+                        let node = Nodes.findOne({ name: Router.current().params.name });
+                        if( node ) {
+                          // get the name from the current station's page we are on. through the router.
+                          var nodeName = node.name;
+                          // grab the last 20 of this Nodes collection
+                          var newspeedObject = Nodes.find({name: nodeName},
+                                    {sort:{createdAt: -1},limit: 1}).fetch();
+                    
+                          /*-----------------------get the speeds-----------------------------*/
+                          // Get the an array of just the speeds of these 20 objects
+                          var newspeed = _.pluck(newspeedObject,'speed');
+                          /*----------------------------------------------------------------------*/
+                          
+                          /*-----------------------get the time ----------------------------------*/
+                          // grab the last 20 of this Nodes collection
+                          // Get the an array of just the speeds of these 20 objects
+                          var newTime = _.pluck(newspeedObject,'createdAt');
+                          /*----------------------------------------------------------------------*/
+                        //}
+                          // set up the updating 4 seconds
+                          // at position 0
+                          var series = this.series[0];
+                          
+                          setInterval(function () {
+                               var x = newTime[0].getTime(); //(new Date()).getTime();
+                               var y = newspeed[0]; //this.series.data[19].y;
+                               //series.data[0].update([x,y],true,true);
+                              //series.addPoint([x, y], true, true);
+                          }, 4000);
+                          
+                          }
+                        }
+                    }
+                }
             },
-            plotLines:[{
-              value: 0,
-              width: 1,
-              color: '#808080'
-            }]
-          },
-          tooltip:{
-            valueSuffix: ' + degrees'
-          },
-          legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'middle',
-            borderWidth: 0
-          },
-          series: [{
-              name: 'speed',
-              data: data
+            title: {
+                text: ' '
+            },
+            xAxis: {
+                type: 'datetime',
+                tickPixelInterval: 150
+            },
+            yAxis: {
+                title: {
+                    text: 'miles per hour'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function () {
+                  /*This.series.name gets Line name made in series below
+                  Next formats the date and time which is pushed in the
+                  series = x. y= the random data point*/
+                    return '<b>' + this.series.name + '</b><br/>' +
+                        Highcharts.dateFormat('%d-%m-%Y %H:%M:%S', this.x) + '<br/>' +
+                        Highcharts.numberFormat(this.y, 2);
+                }
+            },
+            /* This shows the name of the line*/
+            legend: {
+                enabled: false
+            },
+            // Not sure?
+            exporting: {
+                enabled: false
+            },
+            series: [{
+              // Line name
+                name: 'Speed',
+                /* Here is where the data is coming form
+                Make sure to retrieve needed data for the
+                graph here.*/
+                data: (function () {
+                    // generate an array of random data
+                    let node = Nodes.findOne({ name: Router.current().params.name });
+                    if( node ) {
+                      // get the name from the current station's page we are on. through the router.
+                      var nodeName = node.name;
+                      // grab the last 20 of this Nodes collection
+                      var speedCollection_20 = Nodes.find({name: nodeName},
+                              {sort:{createdAt: -1},limit: 20}).fetch();
+                                                    
+                      /*-----------------------get the speeds-----------------------------*/
+                      // Get the an array of just the speeds of these 20 objects
+                      var speed_Array = _.pluck(speedCollection_20,'speed');
+                      /*----------------------------------------------------------------------*/
+                      
+                      /*-----------------------get the time ----------------------------------*/
+                      // grab the last 20 of this Nodes collection
+                      // Get the an array of just the speeds of these 20 objects
+                      var timeArray = _.pluck(speedCollection_20,'createdAt');
+                      /*----------------------------------------------------------------------*/
+                    
+                    
+                    // create the data array
+                    var data = [];
+                    /* ----------------------------------------------------------------------
+                      lets fill the data array with the total number of objets + 
+                      the time of each insert in the collection and the data for this graph
+                    -------------------------------------------------------------------------*/
+                    for (var i = 19; i >= 0; i -= 1) {
+                      // add to the array
+                        data.push({
+                          // add the x value. = to the time
+                            x: timeArray[i].getTime(),
+                          // add the y. equal to the incoming data
+                            y: speed_Array[i]
+                        });
+                    }
+                }
+                    return data;
+                }())
             }],
-          credits: {
+            // Added to get rid of the Highcharts
+            // water mark.
+            credits: {
             enabled: false
           }
-        });
-      
-    }
+          /*----------------------------------------------------*/
+          
+    });
 }
 
 Template.windSpeed.rendered = function(){
