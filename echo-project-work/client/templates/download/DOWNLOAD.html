@@ -1,0 +1,11 @@
+<Template name="DOWNLOAD">
+    <h4> 
+        Download all data for this station.
+    </h4>
+    {{#if Template.subscriptionsReady}}
+        <button class="downloading" href="#">Download</button>
+    {{else}}
+        <div class="loading">{{>spinner}}</div>
+    {{/if}}
+</Template>
+    

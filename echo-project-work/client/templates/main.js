@@ -1,5 +1,5 @@
 
-Meteor.subscribe('nodes');
+//Meteor.subscribe('nodes');
 /*Meteor.subscribe('names');*/
 
 /*var nodeCollection = Nodes.find().fetch();

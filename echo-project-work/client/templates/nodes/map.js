@@ -39,9 +39,9 @@ Template.map.onCreated(function() {
     Tracker.autorun(function() {
       let node = Nodes.findOne({ name: Router.current().params.name });
       if( node ) {
-      var latLng = Geolocation.latLng();
-      if (! latLng)
-        return;
+        var latLng = Geolocation.latLng();
+        if (! latLng)
+          return;
     
         // get the name from the current station's page we are on. through the router.
         var nodeName = node.name;

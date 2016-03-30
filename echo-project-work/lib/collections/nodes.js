@@ -1,4 +1,4 @@
-
+// Client reference name = create the collecion 'TableName'
 Nodes = new Mongo.Collection('nodes');
 Names = new Mongo.Collection('names');
 
