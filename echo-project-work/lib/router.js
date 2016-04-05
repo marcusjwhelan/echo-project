@@ -29,7 +29,35 @@ Router.configure({
 //}
 
 Router.route('/',{name: 'Home'});
-Router.route('ExampleNode');
+// This will be here to deal with inserts form other destinations
+Router.route('/insert',{
+    where: 'server',
+    action: function(){
+      var show = Nodes.find({name: "St. Louis"}).count();
+      console.log(show);
+      var show1=Nodes.find({name: "St. Louis"},{sort: {createdAt: 1},limit: 1}).fetch();
+      console.log(show1);
+      if(show> 30){
+        var last_node = Nodes.findOne({name: "St. Louis"},{sort: {createdAt: 1}});
+        Nodes.remove({_id: last_node._id});
+      }
+      var name = this.params.query.name;
+      var long = parseFloat(this.params.query.long)
+      var lat = parseFloat(this.params.query.lat)
+      var hum = parseFloat(this.params.query.hum)
+      var temp = parseFloat(this.params.query.temp)
+      var dew = parseFloat(this.params.query.dew)
+      var pres = parseFloat(this.params.query.pres)
+      var speed = parseFloat(this.params.query.speed)
+      var dir = parseFloat(this.params.query.dir)
+      Nodes.insert({name: name, dew: dew,
+      temp: temp, direction: dir, speed: speed,
+      longitude: long,latitude: lat, 
+      humidity: hum, pressure: pres});
+    }
+  });
+
+//Router.route('ExampleNode');
 Router.route('map');
 Router.route('humidity');
 Router.route('temperature');
@@ -45,7 +73,11 @@ Router.route('/:name', {
     waitOn: function(){
       return Meteor.subscribe('nodes',this.params.name);
   },
-  });
+});
+  
+
+
+  
 /*
 Router.route('listsShow', {
   path: '/lists/:_id',
@@ -73,3 +105,5 @@ Router.route('home', {
     Router.go('listsShow', Lists.findOne());
   }
 });*/
+
+

@@ -57,3 +57,17 @@ Meteor.publish('names',function(){
 
 
 
+/*
+JsonRoutes.add("POST","/insert",function(req,res,next){
+    console.log("hello");
+});
+*/
+
+var show1 = Nodes.find({name: "NYC Node"}).count();
+var show2 = Nodes.find({name: "Chicago Node"}).count();
+var show3 = Nodes.find({name: "Tulsa Node"}).count();
+var show4 = Nodes.find({name: "St. Louis"}).count();
+var show = Nodes.find({name: "OSU Node 1"}).count();
+var show5 = Nodes.find({name: "LA"}).count();
+console.log(" NYC "+ show1+" Chi "+show2+" Tulsa "+show3+" St. "+show4+ " osu "+show+" LA "+show5);
+
