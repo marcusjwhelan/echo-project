@@ -33,12 +33,12 @@ Router.route('/',{name: 'Home'});
 Router.route('/insert',{
     where: 'server',
     action: function(){
-      var show = Nodes.find({name: "St. Louis"}).count();
+      var show = Nodes.find({name: "LA"}).count();
       console.log(show);
-      var show1=Nodes.find({name: "St. Louis"},{sort: {createdAt: 1},limit: 1}).fetch();
+      var show1=Nodes.find({name: "LA"},{sort: {createdAt: 1},limit: 1}).fetch();
       console.log(show1);
-      if(show> 30){
-        var last_node = Nodes.findOne({name: "St. Louis"},{sort: {createdAt: 1}});
+      if(show> 7999){
+        var last_node = Nodes.findOne({name: "LA"},{sort: {createdAt: 1}});
         Nodes.remove({_id: last_node._id});
       }
       var name = this.params.query.name;
@@ -57,6 +57,34 @@ Router.route('/insert',{
     }
   });
 
+/*
+  Route function to send the user all the data of a particular weather station. All sensor points
+*/
+Router.route('/download/:name',{
+  // The name so it goes to the route and not the name of that link which is the page they are 
+  // already on.
+  name: 'download.name',
+  // These functions are on the server so they have access to the full collection.
+  where: 'server',
+  action: function(){
+    var filename = 'data_file.csv';
+    var fileData ="";
+    
+    var headers ={
+      'Content-type': 'text/csv',
+      'Content-Disposition': "attachment; filename =" +filename
+    };
+    var records = Nodes.find({name: this.params.name},{sort: {createdAt: -1}});
+    
+    fileData = this.params.name+"\r\n";
+    fileData += "Created At"+","+"Direction"+","+"Speed"+","+"Humidity"+","+"Temperature"+","+"Dew Point"+","+"Pressure"+","+"Latitude"+","+"Longitude"+"\r\n";
+    records.forEach(function(rec){
+      fileData += rec.createdAt+","+rec.direction+","+rec.speed+","+rec.humidity+","+rec.temp+","+rec.dew+","+rec.pressure+","+rec.latitude+","+rec.longitude+"\r\n";
+    });
+    this.response.writeHead(200,headers);
+    return this.response.end(fileData);
+  }
+});
 //Router.route('ExampleNode');
 Router.route('map');
 Router.route('humidity');

@@ -2,10 +2,15 @@
     <h4> 
         Download all data for this station.
     </h4>
+  
     {{#if Template.subscriptionsReady}}
-        <button class="downloading" href="#">Download</button>
+        {{#with download}}
+            <a href="{{pathFor 'download.name'}}" target="Router.current()">Download {{name}} Data</a>
+        {{/with}}
     {{else}}
         <div class="loading">{{>spinner}}</div>
     {{/if}}
+  
+  
 </Template>
     

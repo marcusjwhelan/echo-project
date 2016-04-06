@@ -10,3 +10,9 @@ Template.DOWNLOAD.onCreated(function () {
     //sub = this.subscribe('all_node',Router.current().params.name);
     //sub.stop();
 });
+
+Template.DOWNLOAD.helpers({
+    download: function(){
+        return Nodes.findOne();
+    }
+})
