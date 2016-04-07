@@ -1,7 +1,3 @@
-Template.windDirection.helpers({
- 
-});
-
 /*----------------------------------------------------
 -------------Added random button and graph------------
 ------------------------------------------------------*/
@@ -36,7 +32,7 @@ function lineChart(){
                           var nodeName = node.name;
                           // grab the last 20 of this Nodes collection
                           var newDirectionObject = Nodes.find({name: nodeName},
-                                                        {sort:{createdAt: -1},limit: 1}).fetch();
+                                            {sort:{createdAt: -1},limit: 1}).fetch();
                     
                           /*-----------------------get the directions-----------------------------*/
                           // Get the an array of just the directions of these 20 objects
@@ -114,7 +110,7 @@ function lineChart(){
                       var nodeName = node.name;
                       // grab the last 20 of this Nodes collection
                       var directionCollection_20 = Nodes.find({name: nodeName},
-                                                    {sort:{createdAt: -1},limit: 20}).fetch();
+                                        {sort:{createdAt: -1},limit: 20}).fetch();
                                                     
                       /*-----------------------get the directions-----------------------------*/
                       // Get the an array of just the directions of these 20 objects
@@ -164,22 +160,6 @@ Template.windDirection.rendered = function(){
   });
 }
 
-/*
-Template.windDirection.events({
-  // add new random value to this particular node
-  'click #add-value5': function(){
-    var rand = Math.floor((Math.random()*(100))+ 0);
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        var data = node.dew; 
-        Nodes.update({_id: Router.current().params._id},{$push:{dew: 
-        {$each: [rand],$position: 0}}});
-      }
-    }
-  }
-});*/
-  
   
   
   

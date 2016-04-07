@@ -1,7 +1,3 @@
-Template.windSpeed.helpers({
-
-});
-
 /*----------------------------------------------------
 -------------Added random button and graph------------
 ------------------------------------------------------*/
@@ -162,18 +158,3 @@ Template.windSpeed.rendered = function(){
     lineChart1();
   });
 }
-
-/*Template.windSpeed.events({
-  // add new random value to this particular node
-  'click #add-value1': function(){
-    var windS = Math.floor((Math.random()*200)+0);
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        var data = node.speed; 
-        Nodes.update({_id: Router.current().params._id},{$push:{speed: 
-        {$each: [windS],$position: 0}}});
-      }
-    }
-  }
-});*/

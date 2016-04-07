@@ -1,33 +1,3 @@
-Template.dewPoint.helpers({
-  /*currentA: function() {
-    if( Router.current().params._id ) {
-      let node = Nodes.findOne({ _id: Router.current().params._id });
-      if( node ) {
-        var tempArray = [];
-        if(node.dew.length<20){
-          for(i=0; i<node.dew.length;i++){
-            tempArray.push(node.dew[i]);
-          }
-        }
-        else{
-          for(i=0; i<20;i++){
-            tempArray.push(node.dew[i]);
-          }
-        }
-        return tempArray;
-      }
-    }
-  },*//*
-  name: function(){
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        return node.name;
-      }
-    }
-  },*/
-});
-
 /*----------------------------------------------------
 -------------Added random button and graph------------
 ------------------------------------------------------*/
@@ -212,19 +182,3 @@ Template.dewPoint.rendered = function(){
   });
 }
 
-
-/*
-Template.dewPoint.events({
-  // add new random value to this particular node
-  'click #add-value5': function(){
-    var rand = Math.floor((Math.random()*(100))+ 0);
-    if(Router.current().params._id){
-      let node = Nodes.findOne({_id: Router.current().params._id});
-      if(node){
-        var data = node.dew; 
-        Nodes.update({_id: Router.current().params._id},{$push:{dew: 
-        {$each: [rand],$position: 0}}});
-      }
-    }
-  }
-});*/

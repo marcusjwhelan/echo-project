@@ -1,6 +1,3 @@
-Template.humidity.helpers({
-
-});
 
 /*----------------------------------------------------
 -------------Added random button and graph------------

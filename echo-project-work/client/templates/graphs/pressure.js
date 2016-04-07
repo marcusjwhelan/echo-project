@@ -1,6 +1,3 @@
-Template.pressure.helpers({
-
-});
 
 /*----------------------------------------------------
 -------------Added random button and graph------------
