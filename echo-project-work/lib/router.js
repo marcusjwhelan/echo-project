@@ -13,15 +13,15 @@ Router.route('/',{name: 'Home'});
 Router.route('/insert',{
     where: 'server',
     action: function(){
-      var show = Nodes.find({name: "LA"}).count();
-      console.log(show);
-      var show1=Nodes.find({name: "LA"},{sort: {createdAt: 1},limit: 1}).fetch();
-      console.log(show1);
-      if(show> 7999){
-        var last_node = Nodes.findOne({name: "LA"},{sort: {createdAt: 1}});
+      // get the name of the station from the url
+      var name = this.params.query.name;
+      var count_= Nodes.find({name: name}).count();
+      // if the count is 8000 delete the last point then insert after to be back to 8000
+      if(count_ > 7999){
+        var last_node = Nodes.findOne({name: name},{sort: {createdAt: 1}});
         Nodes.remove({_id: last_node._id});
       }
-      var name = this.params.query.name;
+      // convert all number strings to numbers
       var long = parseFloat(this.params.query.long)
       var lat = parseFloat(this.params.query.lat)
       var hum = parseFloat(this.params.query.hum)
@@ -30,6 +30,7 @@ Router.route('/insert',{
       var pres = parseFloat(this.params.query.pres)
       var speed = parseFloat(this.params.query.speed)
       var dir = parseFloat(this.params.query.dir)
+      // insert into collection
       Nodes.insert({name: name, dew: dew,
       temp: temp, direction: dir, speed: speed,
       longitude: long,latitude: lat, 
@@ -52,12 +53,14 @@ Router.route('/download/:name',{
     
     var headers = {
       'Content-type': 'text/csv',
-      'Content-Disposition': "attachment; filename =" +filename
+      'Content-Disposition': "attachment; filename =" + filename
     };
     var records = Nodes.find({name: this.params.name},{sort: {createdAt: -1}});
-    
+    // row 1
     fileData = this.params.name+"\r\n";
+    // row 2
     fileData += "Created At"+","+"Direction"+","+"Speed"+","+"Humidity"+","+"Temperature"+","+"Dew Point"+","+"Pressure"+","+"Latitude"+","+"Longitude"+"\r\n";
+    // all the data in the rest of the rows
     records.forEach(function(rec){
       fileData += rec.createdAt+","+rec.direction+","+rec.speed+","+rec.humidity+","+rec.temp+","+rec.dew+","+rec.pressure+","+rec.latitude+","+rec.longitude+"\r\n";
     });

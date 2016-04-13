@@ -24,7 +24,8 @@ Template.map.helpers({
       // Map initialization options
       return {
         center: new google.maps.LatLng(lat,lon),
-        zoom: MAP_ZOOM
+        zoom: MAP_ZOOM,
+        scrollwheel: false
       };
     }// IF GOOGLE.  
     
@@ -32,6 +33,7 @@ Template.map.helpers({
 });
 
 Template.map.onCreated(function() {
+  GoogleMaps.load({ v: '3', key: 'AIzaSyAV1vquj7e4cwpyb5h7eR6p4l3Am_sN4Zo', libraries: 'geometry,places' });
   GoogleMaps.ready('Map', function(map) {
     var marker;
 

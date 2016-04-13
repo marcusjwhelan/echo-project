@@ -117,8 +117,6 @@ function lineChart5(){
                       // grab the last 20 of this Nodes collection
                       var dewCollection_20 = Nodes.find({name: nodeName},
                                 {sort:{createdAt: -1},limit: 20}).fetch();
-                      var ca = Nodes.find({name: nodeName},{sort:{createdAt: -1}}).count();
-                      console.log(ca + "hmm");
                       /*-----------------------get the dews-----------------------------*/
                       // Get the an array of just the dews of these 20 objects
                       var dew_Array = _.pluck(dewCollection_20,'dew');

@@ -71,3 +71,16 @@ p {
   display: inline-block;
   border-radius: 50%;
 }
+
+.Thanks{
+	color: #999999;
+	background-color: #262626;
+	padding-top: 20px;
+	padding-bottom: 100px;
+}
+
+.Thanks h1 { 
+	font-family: 'Bangers', cursive;
+	font-weight: 400; 
+}
+
