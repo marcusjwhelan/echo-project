@@ -59,7 +59,7 @@ Router.route('/download/:name',{
     // row 1
     fileData = this.params.name+"\r\n";
     // row 2
-    fileData += "Created At"+","+"Direction"+","+"Speed"+","+"Humidity"+","+"Temperature"+","+"Dew Point"+","+"Pressure"+","+"Latitude"+","+"Longitude"+"\r\n";
+    fileData += "Created On"+","+"Direction: Degrees"+","+"Speed: MPH"+","+"Humidity: %"+","+"Temperature: F"+","+"Dew Point"+","+"Pressure: kPa"+","+"Latitude"+","+"Longitude"+"\r\n";
     // all the data in the rest of the rows
     records.forEach(function(rec){
       fileData += rec.createdAt+","+rec.direction+","+rec.speed+","+rec.humidity+","+rec.temp+","+rec.dew+","+rec.pressure+","+rec.latitude+","+rec.longitude+"\r\n";

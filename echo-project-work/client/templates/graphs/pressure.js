@@ -71,7 +71,7 @@ function lineChart3(){
             },
             yAxis: {
                 title: {
-                    text: 'miles per hour'
+                    text: 'kPa'
                 },
                 plotLines: [{
                     value: 0,

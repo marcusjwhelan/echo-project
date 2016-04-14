@@ -71,7 +71,7 @@ function lineChart4(){
             },
             yAxis: {
                 title: {
-                    text: 'miles per hour'
+                    text: 'percent'
                 },
                 plotLines: [{
                     value: 0,
