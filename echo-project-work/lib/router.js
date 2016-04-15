@@ -1,4 +1,5 @@
 Router.configure({
+  trackPageView: true,
   // we use the  layout template to define the layout for the entire app
   layoutTemplate: 'layout',
   // the notFound template is used for unknown routes and missing lists
