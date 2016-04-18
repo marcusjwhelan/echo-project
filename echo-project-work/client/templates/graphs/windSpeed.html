@@ -1,16 +1,4 @@
 <template name="windSpeed">
     <h2>Wind Speed</h2>
-    <p>
-     {{#with currentA}}
-     <!-- Here name is actually calling the name function in ths js-->
-        <ul>Array of wind speed points<br>
-        <!-- This is refering the the returned object of the #humid
-        function from the js file of this html-->
-            <a>{{this}}</a>
-        </ul>
-     {{/with}}
-    </p>
     <div id="line-chart-container1"></div>
-    <button id="add-value1">Random Speed</button>
-    <p>{{count}} Data points</p>
 </template>

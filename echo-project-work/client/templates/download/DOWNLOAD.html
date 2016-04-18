@@ -1,0 +1,17 @@
+<Template name="DOWNLOAD">
+    {{#if Template.subscriptionsReady}}
+        {{#with download}}
+        <div class="coordinates">
+            <h4>
+                Latitude: {{latitude}}     Longitude: {{longitude}}
+            </h4>
+            <div class="datafile">
+                <a href="{{pathFor 'download.name'}}" target="Router.current()">Download {{name}} Data</a>
+            </div>
+        </div>
+        {{/with}}
+    {{else}}
+        <div class="loading">{{>spinner}}</div>
+    {{/if}}
+</Template>
+    

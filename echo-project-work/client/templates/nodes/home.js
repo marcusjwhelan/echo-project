@@ -1,6 +1,6 @@
 Meteor.startup(function(){
   WebFontConfig = {
-    google: { families: [ 'Droid+Sans::latin', 'Orbitron::latin' ] }
+    google: { families: [ 'Droid+Sans::latin', 'Orbitron::latin','Bangers::latin' ] }
   };
   (function() {
     var wf = document.createElement('script');

@@ -1,11 +1,3 @@
-/* CSS declarations go here */
-/*
- * Base structure
- */
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-
-
 
 /*
  * Global add-ons
@@ -26,9 +18,6 @@ body {
 	border-bottom:0;
 }
 
-/* -----------------------------------------------------------------------------
-										MINE 
-	--------------------------------------------------------------------------- */
 .container-fluid .jumbotron {
     padding-right: 15px;
     padding-left: 15px;
@@ -82,3 +71,16 @@ p {
   display: inline-block;
   border-radius: 50%;
 }
+
+.Thanks{
+	color: #999999;
+	background-color: #262626;
+	padding-top: 20px;
+	padding-bottom: 100px;
+}
+
+.Thanks h1 { 
+	font-family: 'Bangers', cursive;
+	font-weight: 400; 
+}
+

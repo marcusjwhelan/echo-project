@@ -24,3 +24,8 @@ highcharts:highcharts-meteor
 
 
 highcharts-container
+aldeed:collection2
+dburles:google-maps
+mdg:geolocation
+simple:json-routes
+reywood:iron-router-ga

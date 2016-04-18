@@ -1,3 +1,14 @@
 .graph p{
     margin-right: auto;
 }
+
+.Graphs{
+    font-family: 'Orbitron', sans-serif;
+}
+
+.Graphs h2{
+    padding: 20px;
+    background-color: #CCCCCC;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
