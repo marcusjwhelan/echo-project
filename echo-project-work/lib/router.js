@@ -22,9 +22,19 @@ Router.route('/insert',{
         var last_node = Nodes.findOne({name: name},{sort: {createdAt: 1}});
         Nodes.remove({_id: last_node._id});
       }
+      var long = this.params.query.long
+      var lat = this.params.query.lat
+      var first_lat = lat.substring(0,2)
+      var middle_lat = lat.substring(2,4)
+      var second_lat = lat.substring(5)
+      var first_long = long.substring(0,3)
+      var middle_long = long.substring(3,5)
+      var second_long = long.substring(6)
       // convert all number strings to numbers
-      var long = parseFloat(this.params.query.long)
-      var lat = parseFloat(this.params.query.lat)
+      var new_lat = first_lat+'.'+middle_lat+second_lat
+      new_lat = parseFloat(new_lat)
+      var new_long = first_long+'.'+middle_long+second_long
+      new_long = parseFloat(new_long)
       var hum = parseFloat(this.params.query.hum)
       var temp = parseFloat(this.params.query.temp)
       var dew = parseFloat(this.params.query.dew)
@@ -34,7 +44,7 @@ Router.route('/insert',{
       // insert into collection
       Nodes.insert({name: name, dew: dew,
       temp: temp, direction: dir, speed: speed,
-      longitude: long,latitude: lat, 
+      longitude: new_long,latitude: new_lat, 
       humidity: hum, pressure: pres});
     }
   });
