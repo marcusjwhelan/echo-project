@@ -35,6 +35,7 @@ Router.route('/insert',{
       new_lat = parseFloat(new_lat)
       var new_long = first_long+'.'+middle_long+second_long
       new_long = parseFloat(new_long)
+      console.log(new_long)
       var hum = parseFloat(this.params.query.hum)
       var temp = parseFloat(this.params.query.temp)
       var dew = parseFloat(this.params.query.dew)
