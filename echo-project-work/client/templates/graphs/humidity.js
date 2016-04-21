@@ -86,7 +86,7 @@ function lineChart4(){
                   series = x. y= the random data point*/
                     return '<b>' + this.series.name + '</b><br/>' +
                         Highcharts.dateFormat('%d-%m-%Y %H:%M:%S', this.x) + '<br/>' +
-                        Highcharts.numberFormat(this.y, 2);
+                        Highcharts.numberFormat(this.y, 2)+ " %";
                 }
             },
             /* This shows the name of the line*/
