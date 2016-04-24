@@ -12,3 +12,39 @@
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
+#Speed_Header{
+    background-color: #CCCCCC;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+
+#Speed_Header h2{
+    display: inline-block;
+    vertical-align: top;
+}
+#Speed_Header p {
+    display: inline-block;
+    margin-left: 0px;
+    padding: 20px;
+    vertical-align: top;
+    background-color: #CCCCCC;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    position: absolute;
+    right:0;
+}
+@media (max-width:770px) {
+    #Speed_Header p {
+        display: inline-block;
+        margin-left: 0px;
+        padding: 20px;
+        vertical-align: top;
+        background-color: #CCCCCC;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        position: relative;
+        
+    }
+}
