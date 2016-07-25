@@ -50,6 +50,11 @@ p {
 	margin-left: 20px;
 	font-family: 'Droid Sans', sans-serif;
 }
+.sub-last{
+	padding-top: 10px;
+	border-top: 1px solid #eee;
+	margin-left: 10px;
+}
 /*-----------------------------------------------------------------------------
  * Placeholder dashboard ideas
  */
@@ -58,7 +63,7 @@ p {
   margin-bottom: 30px;
   text-align: center;
   border-top: 1px solid #eee;
-  padding-top: 19px;
+  padding-top: 25px;
 }
 .placeholders h4 {
   margin-bottom: 0;

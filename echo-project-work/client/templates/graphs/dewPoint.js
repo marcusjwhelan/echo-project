@@ -76,7 +76,7 @@ function lineChart5(){
             },
             yAxis: {
                 title: {
-                    text: 'Dew Point'
+                    text: 'Fahrenheit'
                 },
                 plotLines: [{
                     value: 0,
@@ -91,7 +91,7 @@ function lineChart5(){
                   series = x. y= the random data point*/
                     return '<b>' + this.series.name + '</b><br/>' +
                         Highcharts.dateFormat('%d-%m-%Y %H:%M:%S', this.x) + '<br/>' +
-                        Highcharts.numberFormat(this.y, 2);
+                        Highcharts.numberFormat(this.y, 2)+ " °";
                 }
             },
             /* This shows the name of the line*/
@@ -104,7 +104,7 @@ function lineChart5(){
             },
             series: [{
               // Line name
-                name: 'Random data',
+                name: 'Dew Point',
                 /* Here is where the data is coming form
                 Make sure to retrieve needed data for the
                 graph here.*/
