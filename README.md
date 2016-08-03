@@ -7,7 +7,7 @@ Readme file to contain more relavant material.
 
 # Website URL
 
-http://echo-project-marcusjwhelan.com/
+https://echo-project-marcusjwhelan.com/
 
 # Info
 
